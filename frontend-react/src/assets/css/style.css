@@ -1,0 +1,20 @@
+body{
+    background-color: rgb(16, 5, 33);
+    
+}
+
+.bg-light-dark{
+    background-color: #2B3035;      
+}
+
+#root{
+    display: flex;
+    flex-direction: column;
+    /* screen will be filled 100vh minheight */
+    min-height: 100vh; 
+
+    justify-content: space-between;
+
+
+}
+
