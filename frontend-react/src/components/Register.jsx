@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -16,7 +18,9 @@ const Register = () => {
 
 
     const handleLogin = async (e) => {
+        setSuccess(false)
         e.preventDefault();
+        setLoading(true)
         const userData = {username, email, password}
         try{
             const response = await axios.post("http://localhost:8000/api/v1/register/", userData)
@@ -31,7 +35,7 @@ const Register = () => {
 
         }
         finally{
-
+            setLoading(false)
         }
     }
 
@@ -45,7 +49,12 @@ const Register = () => {
             <input type='password' placeholder='enter the password' value={password} onChange={(e)=> setPassword(e.target.value)} className='form-control mb-3'/>
             <small>{errors.password && <div className='text-danger'>{errors.password}</div>}</small>
             {success && <p className='text-success text-center'>Registered Successfully! go to <Link to="/login/">Login</Link> page.</p>}
-            <button type='submit' className='btn btn-outline-info d-block mx-auto'>Register</button>
+            {
+                loading? <button type='submit' className='btn btn-outline-info d-block mx-auto'><FontAwesomeIcon icon={faSpinner} spin />Please wait...</button> :
+                <button type='submit' className='btn btn-outline-info d-block mx-auto'>Register</button>
+
+            }
+            
         </form>
     </>
   )
