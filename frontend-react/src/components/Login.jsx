@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 
+
 const Login = () => {
 
     const [username, setUsername] = useState('')
@@ -21,9 +22,14 @@ const Login = () => {
       try{
         const response = await axios.post("http://localhost:8000/api/token/", loginData)
         console.log(response.data)
-        console.log("Login Successful")   
+        localStorage.setItem("access", response.data.access)
+        localStorage.setItem("refresh", response.data.refresh)
+        console.log("Login Successful")  
         setErrors({})
         setSuccess(true)  
+        
+
+        
       } 
       catch(error){
         console.log("Login Error:", error.response.data)
