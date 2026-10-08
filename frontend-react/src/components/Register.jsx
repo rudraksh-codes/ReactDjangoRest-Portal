@@ -2,8 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -17,8 +16,7 @@ const Register = () => {
     const [loading, setLoading] = useState(false)
 
 
-    const handleLogin = async (e) => {
-        setSuccess(false)
+    const handleRegister = async (e) => {
         e.preventDefault();
         setLoading(true)
         const userData = {username, email, password}
@@ -33,7 +31,7 @@ const Register = () => {
             setErrors(error.response.data) // already an object
             console.log("Registration Error : ", error.response.data);
 
-        }
+        }   
         finally{
             setLoading(false)
         }
@@ -41,7 +39,7 @@ const Register = () => {
 
     return (
     <>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
             <input type="text" placeholder='enter the username' value={username} onChange={(e)=> setUsername(e.target.value)} className='form-control mb-3'/>
             <small>{errors.username && <div className='text-danger'>{errors.username}</div>}</small>
             <input type='email' placeholder='enter the email' value={email} onChange={(e)=> setEmail(e.target.value)} className='form-control mb-3'/>
