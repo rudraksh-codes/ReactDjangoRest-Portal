@@ -22,16 +22,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
+RAZORPAY_KEY_ID=config("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET=config("RAZORPAY_KEY_SECRET")
+RAZORPAY_CALLBACK_URL = "http://127.0.0.1:8000/payment-verify/"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default = False, cast = bool)
-
+    
 
 ALLOWED_HOSTS = []
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5000",
+    "http://localhost:5173","http://localhost:5000","http://localhost:3000"
 ]
 
 
@@ -50,6 +53,8 @@ INSTALLED_APPS = [
     'corsheaders', 
     'rest_framework_simplejwt', 
     'product', 
+    'razorpay', 
+    'push', 
 
 ]
 
@@ -69,7 +74,7 @@ ROOT_URLCONF = 'stock_prediction_main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates', 'push/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,4 +151,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1), 
 }

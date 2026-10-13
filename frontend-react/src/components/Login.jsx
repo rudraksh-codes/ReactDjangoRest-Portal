@@ -4,7 +4,7 @@ import { useState, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from './AuthProvider'
+import { AuthContext } from '../AuthProvider'
 
 
 

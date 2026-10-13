@@ -1,14 +1,23 @@
 import React from 'react'
 import logo from '../assets/images/stock-logo.png'
 import Button from './Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
-import { AuthContext } from './AuthProvider'
+import { AuthContext } from '../AuthProvider'
 
 
 const Header = () => {
 
   const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const handleLogout = ()=> {
+    localStorage.removeItem("accessToken"); 
+    localStorage.removeItem("refreshToken"); 
+    setIsLoggedIn(false); 
+    navigate("login/")
+  }
+
 
   return (
     <>
@@ -18,13 +27,14 @@ const Header = () => {
               {
                   isLoggedIn? (
                     <>
-                      <Button text="Login" link="/login/"/>
-                      <Button text="Register" class="btn btn-outline-info" link="/register/"/>
+                      <Button text="Dashboard" link="/dashboard/"/>
+                      <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
                     </>
                   ) : (
+
                     <>
-                      <Button text="Dashboard" link="/dashboard/"/>
-                      <Button text="Logout" link="/logout/"/>
+                      <Button text="Login" link="/login/"/>
+                      <Button text="Register" class="btn btn-outline-info" link="/register/"/>
                     </>
 
                   )

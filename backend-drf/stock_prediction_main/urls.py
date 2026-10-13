@@ -20,11 +20,34 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from product import views as ProductView
+from push import views as PushView
+from accounts import views as AuthView
+
+#template view fast 
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('products/', include('product.urls')), 
+
     #Base API Endpoint
     path('api/v1/', include("api.urls")),
+    
+    #Login Endpoints
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
+
+    #protected view
+    path('protected-view/', AuthView.ProtectedView.as_view()), 
+
+    #test rzp url
+    path("payment-verify/", ProductView.PaymentCallbackView.as_view(), name="payment_verify"), 
+
+    #test push notifi...s url
+    path('', PushView.home, name = "home"), 
+    path('firebase-messaging-sw.js', TemplateView.as_view(template_name='firebase-messaging-sw.js',
+            content_type='application/javascript',), )
+
+
 ]
