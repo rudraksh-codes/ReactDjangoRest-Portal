@@ -16,4 +16,4 @@ class ProtectedView(APIView):
     permission_classes = [IsAuthenticated] #accessToken do or access lo 
 
     def get(self, request): 
-        return JsonResponse({"message" : "proctected page data fetched"})
+        return JsonResponse({"message" : "protected CONFIDENTIAL content of the dashboard fetched"})

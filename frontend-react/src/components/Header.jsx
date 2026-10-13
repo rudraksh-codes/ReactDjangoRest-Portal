@@ -28,12 +28,14 @@ const Header = () => {
                   isLoggedIn? (
                     <>
                       <Button text="Dashboard" link="/dashboard/"/>
+                      &nbsp;
                       <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
                     </>
                   ) : (
 
                     <>
                       <Button text="Login" link="/login/"/>
+                      &nbsp;
                       <Button text="Register" class="btn btn-outline-info" link="/register/"/>
                     </>
 

@@ -1,9 +1,33 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+
 
 const Dashboard = () => {
+const [data, setData] = useState(); 
+const token = localStorage.getItem("accessToken")   
+
+    useEffect( ()=> {
+        const fetchData = async ()=> {
+            const response = await axios.get(
+            "http://localhost:8000/protected-view/", 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }, 
+            }
+        )
+            console.log("response", response)
+            setData(response.data.message)
+        }
+        fetchData();
+        
+        
+    }, )
+
   return (
     <>
-      <div className='text-light'>Dashboard</div>
+      <h1 className='text-light'>Dashboard</h1>
+      <h2 className='text-light'>Returned {data}</h2>
     </>
   )
 }
