@@ -39,7 +39,6 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
 
     #protected view
-    path('protected-view/', AuthView.ProtectedView.as_view()), 
 
     #test rzp url
     path("payment-verify/", ProductView.PaymentCallbackView.as_view(), name="payment_verify"), 

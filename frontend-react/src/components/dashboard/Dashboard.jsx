@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import axiosInstance from '../../axiosInstance';
 
 
 const Dashboard = () => {
@@ -8,8 +9,8 @@ const token = localStorage.getItem("accessToken")
 
     useEffect( ()=> {
         const fetchData = async ()=> {
-            const response = await axios.get(
-            "http://localhost:8000/protected-view/", 
+            const response = await axiosInstance.get(
+            "/protected-view/", 
             {
                 headers: {
                     Authorization: `Bearer ${token}`
