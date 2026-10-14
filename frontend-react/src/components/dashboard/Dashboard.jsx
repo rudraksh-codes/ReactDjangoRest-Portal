@@ -5,19 +5,10 @@ import axiosInstance from '../../axiosInstance';
 
 const Dashboard = () => {
 const [data, setData] = useState(); 
-const token = localStorage.getItem("accessToken")   
 
     useEffect( ()=> {
         const fetchData = async ()=> {
-            const response = await axiosInstance.get(
-            "/protected-view/", 
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }, 
-            }
-        )
-            console.log("response", response)
+            const response = await axiosInstance.get("/protected-view/")
             setData(response.data.message)
         }
         fetchData();
