@@ -11,6 +11,7 @@ import Test from './components/Test'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
 import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
 
 
 
@@ -24,7 +25,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Main/>} />
         <Route path='/register/' element={<Register/>} />
-        <Route path='/login/' element={<Login/>}/>
+        <Route path='/login/' element={<PublicRoute><Login/></PublicRoute>}/>
         <Route path="/test/" element={<Test/>}/>
         <Route path='/dashboard/' element={<PrivateRoute><Dashboard/></PrivateRoute>} />
 
