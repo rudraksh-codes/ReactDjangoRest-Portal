@@ -16,7 +16,6 @@ axiosInstance.interceptors.request.use(
         const token = localStorage.getItem("accessToken")
         if (token){
             config.headers.Authorization = `Bearer ${token}`;
-            console.log("from config",  config)
         }
         return config; 
     }, 
@@ -24,6 +23,47 @@ axiosInstance.interceptors.request.use(
     function(error){
         return Promise.reject(error);
     }
+)
+
+
+//response interceptor 
+axiosInstance.interceptors.response.use(
+    function(response){
+        console.log(response)
+        console.log(response.status)
+
+        return response ; 
+    }, 
+    // handle 401 failed response
+    async function(error){
+        // what request gave originally
+        const originalRequest = error.config; 
+        if(error.response.status===401 && !originalRequest.retry){
+            originalRequest.retry = true
+            const refreshToken = localStorage.getItem("refreshToken")
+            try{
+                const response = await axios.post(
+                "/token/refresh/",  
+                {refresh : refreshToken}, 
+                {baseURL}
+            )
+                localStorage.setItem("accessToken", response.data.access)
+                originalRequest.headers.Authorization = `Bearer ${response.data.access}`
+                return axiosInstance(originalRequest)
+            
+        }catch(error){
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("refreshToken")
+            window.location.href = "/login/"
+        } 
+
+
+
+    }
+    return Promise.reject(error)
+
+}
+
 )
 
 
