@@ -10,6 +10,7 @@ import Test from './components/Test'
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard'
+import PrivateRoute from './PrivateRoute'
 
 
 
@@ -25,7 +26,7 @@ function App() {
         <Route path='/register/' element={<Register/>} />
         <Route path='/login/' element={<Login/>}/>
         <Route path="/test/" element={<Test/>}/>
-        <Route path='/dashboard/' element={<Dashboard/>} />
+        <Route path='/dashboard/' element={<PrivateRoute><Dashboard/></PrivateRoute>} />
 
       </Routes>
     <Footer/>
