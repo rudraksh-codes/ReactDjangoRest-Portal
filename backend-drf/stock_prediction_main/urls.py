@@ -27,6 +27,8 @@ from accounts import views as AuthView
 #template view fast 
 from django.views.generic import TemplateView
 
+from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('product.urls')), 
@@ -38,6 +40,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), 
 
+
     #protected view
 
     #test rzp url
@@ -46,7 +49,10 @@ urlpatterns = [
     #test push notifi...s url
     path('', PushView.home, name = "home"), 
     path('firebase-messaging-sw.js', TemplateView.as_view(template_name='firebase-messaging-sw.js',
-            content_type='application/javascript',), )
+            content_type='application/javascript',), ), 
+
+    #celery_test
+    path('celery-test/', views.celery_test)
 
 
 ]

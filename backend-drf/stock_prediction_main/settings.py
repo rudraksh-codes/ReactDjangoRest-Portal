@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'product', 
     'razorpay', 
     'push', 
+    'testCelery',
 
 ]
 
@@ -158,3 +159,6 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(seconds=5), 
     "REFRESH_TOKEN_LIFETIME" : timedelta(minutes=15)
 }
+
+#CELERY_....
+CELERY_BROKER_URL = "redis://localhost:6379"
